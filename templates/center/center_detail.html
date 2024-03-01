@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Center-detail  {% endblock title %}
+
+{% block content %}
+<h2>Landing page</h2>
+<img  style="width:200px; height:200px;" src="{{  center.center_image.url }}"><br>
+{{ center.name }} <br>
+{{ center.teaching_format }} <br>
+{{ center.courses }} <br>
+{{ center.description }} <br>
+{{ center.create_at }} <br>
+<a href="{% url 'centers:center-list' %}">Centers</a> <hr>
+{% for review in center.center_review.all %}
+<p><a href="{% url 'users:profile' %}">{{ user.username }}:</a></p> <b>{{ review.star_given }} stars |{{ review.create_at }}</b><br>
+{{ review.comment }}<br> <br>
+
+{% endfor %}
+
+
+{% endblock content %}

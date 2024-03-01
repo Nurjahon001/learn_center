@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} Center  {% endblock title %}
+
+{% block content %}
+<h2>Landing page</h2>
+<form method="get">
+   <input type="text" placeholder="Qidiruv" id="search" name="q" value="{{ search_query }}">
+   <button >Search</button>
+</form><br><br>
+<div class="site">
+{% for center in centers %}
+<a href="{% url 'centers:center-detail' center.pk %}">Center Detail</a>
+<img style="width:200px; height:200px" src="{{ center.center_image.url }}"><br>
+   <b> {{ center.name }} </b><hr>
+{% endfor %}
+</div>
+<div class="pagination">
+            <span class="step-links">
+                {% if centers.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ centers.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ centers.number }} of {{ centers.paginator.num_pages }}.
+                </span>
+
+                {% if centers.has_next %}
+                    <a href="?page={{ centers.next_page_number }}">next</a>
+                    <a href="?page={{ centers.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+{% endblock content %}
